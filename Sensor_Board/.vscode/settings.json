@@ -1,0 +1,6 @@
+{
+    "terminal.integrated.env.windows": {
+        "PATH": "C:\\Users\\fateme\\.platformio\\penv\\Scripts;C:\\Users\\fateme\\.platformio\\penv;C:\\watcom-1.3\\binnt;C:\\watcom-1.3\\binw;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\MATLAB\\R2015b\\runtime\\win64;C:\\Program Files\\MATLAB\\R2015b\\bin;C:\\Program Files\\MATLAB\\R2015b\\polyspace\\bin;C:\\Users\\fateme\\AppData\\Local\\Microsoft\\WindowsApps;C:\\altera\\13.0sp1\\modelsim_ase\\win32aloem;C:\\Users\\fateme\\AppData\\Local\\atom\\bin;C:\\Users\\fateme\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\watcom-1.3\\binnt;C:\\watcom-1.3\\binw;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\MATLAB\\R2015b\\runtime\\win64;C:\\Program Files\\MATLAB\\R2015b\\bin;C:\\Program Files\\MATLAB\\R2015b\\polyspace\\bin;C:\\Users\\fateme\\AppData\\Local\\Microsoft\\WindowsApps;C:\\altera\\13.0sp1\\modelsim_ase\\win32aloem;C:\\Users\\fateme\\AppData\\Local\\atom\\bin;C:\\Users\\fateme\\AppData\\Local\\Programs\\Microsoft VS Code\\bin",
+        "PLATFORMIO_CALLER": "vscode"
+    }
+}
