@@ -1,21 +1,30 @@
-#include <Arduino.h>
+#include <Ultrasonic.h>
+#include <LM35.h>
 
-int val;
-int tempPin=1;
+Ultrasonic ultrasonic(5,6); // (Trig PIN,Echo PIN)
+const int analogPin = 0;
+// the variable for the data
+float sensorValue = 0;
+
+
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(9600);
-
+  
+  analogReference(INTERNAL);
+  digitalWrite(4, HIGH); // VCC +5V mode  
+  digitalWrite(7, LOW);  // GND mode
 }
 
-void loop() {
-  val=analogRead(tempPin);
-  float mv= (val/1024.0)*5000;
-  float cell=mv/10;
-
-  Serial.print("ttt");
-  Serial.print(cell);
-  Serial.println();
-  delay(1000);
-  // put your main code here, to run repeatedly:
+void loop()
+{
+  Serial.print(ultrasonic.Ranging(CM)); // CM or INC
+ // Serial.println(" cm" );
+  sensorValue = float(analogRead(analogPin)) * 110 / 1024;
+  // output data to serial monitor
+  //Serial.print("temp: ");
+  // print only one decimal place
+  //Serial.print(sensorValue, 1);
+  //Serial.println("degrees C");
+  
+  delay(100);
 }
