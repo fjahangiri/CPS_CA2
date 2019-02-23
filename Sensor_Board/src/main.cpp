@@ -17,10 +17,11 @@ void setup() {
 
 void loop(){
   Serial.print(ultrasonic.Ranging(CM)); // CM or INC
- // Serial.print(" cm" );
+  Serial.print('u');
   sensorValue = float(analogRead(analogPin)) * 110 / 1024;
   //Serial.print("temp: ");
   Serial.print(sensorValue, 1);
+  Serial.print('e');
   //Serial.print("degrees C");
   delay(100);
 }

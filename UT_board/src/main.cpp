@@ -39,17 +39,9 @@ void loop() {
 #include <Arduino.h>
 #include <Wire.h>
 boolean start=true;
-int sum;
+float sum;
 int address;
-union {
-    float f;
-    byte b[4];
-} u;
-union {
-    float fval;
-    byte bval[4];
-} floatAsBytes;
-
+byte buffer[4];
 void setup() {
   Wire.begin();
   Wire.beginTransmission(110);
@@ -69,32 +61,43 @@ void generateAddress(){
   if(address<13)address=address+1;
   else if(address==13)address=40;
   else if(address<43)address=address+1;
-  else address=13;
+  else address=10;
 }
 
 void loop() {
-  for(int j=3;j>=0;j--){
+  for(int j=0;j<4;j++){
     generateAddress();
     sendAddress();
     Wire.requestFrom(110,1);
-    u.b[j]=Wire.read();
+    
+    buffer[j]=Wire.read();
+    //Serial.println(buffer[j]);
   }
-  float x=u.f;
-  for(int j=3;j>=0;j--){
-    generateAddress();
-    sendAddress();
-    Wire.requestFrom(110,1);
-    u.b[j]=Wire.read();
 
+  float x = *((float*)(buffer));
+
+ // Serial.println(x);
+  for(int j=0;j<4;j++){
+    generateAddress();
+    sendAddress();
+    Wire.requestFrom(110,1);
+    buffer[j]=Wire.read();
+   // Serial.println(buffer[j]);
   }
-  float y=u.f;
-  Serial.println(y);
-  sum += pow(2,pow(x,2)) +y;
+
+  float y = *((float*)(buffer));
   
-  floatAsBytes.fval = sum;
-  Serial.println(floatAsBytes.bval[3]);
-  Serial.println(floatAsBytes.bval[2]);
-  Serial.println(floatAsBytes.bval[1]);
-  Serial.println(floatAsBytes.bval[0]);
+  //Serial.println(y);
+  sum =pow(x,2) +pow(y,2);
+  char * b = reinterpret_cast<char*>(&sum);
+  Serial.write(b,4);
+ // Serial.print(b[1],BIN);
+ // Serial.print(b[2],BIN);
+ // Serial.print(b[3],BIN);
+  // floatAsBytes.fval = sum;
+  // Serial.println(floatAsBytes.bval[3]);
+  // Serial.println(floatAsBytes.bval[2]);
+  // Serial.println(floatAsBytes.bval[1]);
+ 
   delay(100);
 }

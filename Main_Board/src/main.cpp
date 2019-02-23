@@ -5,42 +5,46 @@
 
 LiquidCrystal lcd(12,11,5,4,3,2);
 SoftwareSerial softserial(6,7);//6 RX , 7 TX
-
+byte buffer[4];
+float num;
 void setup(){
-  
-  lcd.begin(16 ,2);               // initialize the lcd
+  num=0;
+  lcd.begin(16 ,2);               
   Serial.begin(9600);
   softserial.begin(9600);
-  lcd.setCursor ( 0 , 1 ); // go to position
+  lcd.setCursor ( 0 , 1 ); 
 }
-
 void loop(){
-  // Do a little animation
   
-  if(Serial.available()){
-    lcd.clear();
-    char data;
-    data = Serial.read();
-    softserial.print(data);
-    lcd.print(data);
-    data = Serial.read();
-    softserial.print(data);
-    lcd.print(data);
-    lcd.print("cm");
-    lcd.println();
-    data = Serial.read();
-    softserial.print(data);
-    lcd.print(data);
-    data = Serial.read();
-    softserial.print(data);
-    lcd.print(data);
-    data = Serial.read();
-    softserial.print(data);
-    lcd.print(data);
-    data = Serial.read();
-    softserial.print(data);
-    lcd.print(data);
-    lcd.println("`C");
-    delay(100); // wait so it can be seen
-  }
+  lcd.clear();
+  if(softserial.available()>3){
+      for(int i=0;i<4;i++){
+        buffer[i]=softserial.read();
+      }
+    }     
+    num = *((float*)(buffer));
+  
+      lcd.println(num);
+    delay(600); 
+
+  
+  // if(Serial.available()){
+  //   char data;
+  //   while(true){
+  //     data = Serial.read();
+  //     if(data == 'e'){
+  //       break;
+  //     }
+  //     if(data == 'u'){
+  //       lcd.print("cm");
+  //       lcd.println();
+  //     }
+  //     else{
+  //       //softserial.print(data);
+  //       lcd.print(data);
+  //     }
+  //   }
+  //   lcd.print("`c");
+  //   lcd.println(); 
+  //}
 }
