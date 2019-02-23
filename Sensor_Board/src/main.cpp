@@ -15,16 +15,12 @@ void setup() {
   digitalWrite(7, LOW);  // GND mode
 }
 
-void loop()
-{
+void loop(){
   Serial.print(ultrasonic.Ranging(CM)); // CM or INC
- // Serial.println(" cm" );
+ // Serial.print(" cm" );
   sensorValue = float(analogRead(analogPin)) * 110 / 1024;
-  // output data to serial monitor
   //Serial.print("temp: ");
-  // print only one decimal place
-  //Serial.print(sensorValue, 1);
-  //Serial.println("degrees C");
-  
+  Serial.print(sensorValue, 1);
+  //Serial.print("degrees C");
   delay(100);
 }
