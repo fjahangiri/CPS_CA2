@@ -4,7 +4,7 @@
 
 
 LiquidCrystal lcd(12,11,5,4,3,2);
-SoftwareSerial softserial(6,7);//6 RX , 7 TX
+SoftwareSerial softserial(7,6);//6 RX , 7 TX
 byte buffer[4];
 float num;
 void setup(){
@@ -15,36 +15,39 @@ void setup(){
   lcd.setCursor ( 0 , 1 ); 
 }
 void loop(){
-  
+ 
   lcd.clear();
-  if(softserial.available()>3){
-      for(int i=0;i<4;i++){
-        buffer[i]=softserial.read();
+  
+  if(Serial.available()>0){
+     for(int i=0;i<4;i++){
+       buffer[i]=Serial.read();
       }
+     
     }     
-    num = *((float*)(buffer));
-  
-      lcd.println(num);
-    delay(600); 
+      float x = *((float*)(buffer));
+    lcd.println(x);
 
-  
-  // if(Serial.available()){
-  //   char data;
-  //   while(true){
-  //     data = Serial.read();
-  //     if(data == 'e'){
-  //       break;
-  //     }
-  //     if(data == 'u'){
-  //       lcd.print("cm");
-  //       lcd.println();
-  //     }
-  //     else{
-  //       //softserial.print(data);
-  //       lcd.print(data);
-  //     }
-  //   }
-  //   lcd.print("`c");
-  //   lcd.println(); 
-  //}
+
+  softserial.listen();
+  if(softserial.available()){
+    char data;
+    while(true){
+      data = softserial.read();
+      if(data == 'e'){
+        break;
+      }
+      if(data == 'u'){
+        lcd.print("cm");
+        lcd.println();
+      }
+      else{
+        //softserial.print(data);
+        lcd.print(data);
+      }
+    }
+    lcd.print("`c");
+    lcd.println(); 
+  }
+      delay(100); 
+
 }

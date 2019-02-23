@@ -76,7 +76,7 @@ void loop() {
 
   float x = *((float*)(buffer));
 
- // Serial.println(x);
+ // Serial.printsssln(x);
   for(int j=0;j<4;j++){
     generateAddress();
     sendAddress();
@@ -87,17 +87,17 @@ void loop() {
 
   float y = *((float*)(buffer));
   
-  //Serial.println(y);
   sum =pow(x,2) +pow(y,2);
-  char * b = reinterpret_cast<char*>(&sum);
-  Serial.write(b,4);
- // Serial.print(b[1],BIN);
- // Serial.print(b[2],BIN);
- // Serial.print(b[3],BIN);
+//  Serial.print(sum);
+ // char * b = (char *) &sum;
   // floatAsBytes.fval = sum;
   // Serial.println(floatAsBytes.bval[3]);
   // Serial.println(floatAsBytes.bval[2]);
   // Serial.println(floatAsBytes.bval[1]);
- 
-  delay(100);
+   byte * b = (byte *) &sum;
+   Serial.write(b[0]);
+   Serial.write(b[1]);
+   Serial.write(b[2]);
+   Serial.write(b[3]);
+   delay(100);
 }
