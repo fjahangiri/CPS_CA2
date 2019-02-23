@@ -30,6 +30,26 @@ void loop(){
     lcd.println(x);
 
 
+  if(altSerial.available()){
+    lcd.clear();
+    char data;
+    while(true){
+      data = altSerial.read();
+      if(data == 'e'){
+        break;
+      }
+      if(data == 'u'){
+        lcd.print("cm");
+        lcd.println();
+      }
+      else{
+        //softserial.print(data);
+        lcd.print(data);
+      }
+    }
+    lcd.print("`c");
+    lcd.println(); 
+  }
       delay(100); 
 
 }
