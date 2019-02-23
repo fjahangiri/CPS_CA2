@@ -19,19 +19,16 @@ void setup(){
 void loop(){
  
   lcd.clear();
-  
-  if(Serial.available()>0){
+  float x;
+  if(Serial.available()>3){
      for(int i=0;i<4;i++){
        buffer[i]=Serial.read();
       }
-     
+      x = *((float*)(buffer));
+      lcd.println(x);
+
     }     
-   float x = *((float*)(buffer));
-    lcd.println(x);
-
-
-  if(altSerial.available()){
-    lcd.clear();
+  if(altSerial.available()>3){
     char data;
     while(true){
       data = altSerial.read();
@@ -48,7 +45,7 @@ void loop(){
       }
     }
     lcd.print("`c");
-    lcd.println(); 
+    lcd.println();
   }
       delay(100); 
 
