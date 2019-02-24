@@ -25,10 +25,12 @@ void loop(){
        buffer[i]=Serial.read();
       }
       x = *((float*)(buffer));
-      lcd.println(x);
+      lcd.print(x);
+      lcd.print("utboard data");
+      lcd.println();
 
     }     
-  if(altSerial.available()>3){
+  if(altSerial.available()>0){
     char data;
     while(true){
       data = altSerial.read();
